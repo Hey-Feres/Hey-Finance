@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kind: MyString
+  title: MyString
+  value: 9.99
+  group: MyString
+
+two:
+  kind: MyString
+  title: MyString
+  value: 9.99
+  group: MyString

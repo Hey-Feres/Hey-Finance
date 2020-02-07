@@ -1,0 +1,99 @@
+#transactions_wrapper
+	- @transactions.each do |transaction|
+		- if transaction.kind == "Receita"
+	 		.wrap style="background: #33cc33"
+	 			.d-flex.justify-content-between
+	 				.d-flex.justify-content-start
+	 					p= transaction.group
+	 				.d-flex.justify-content-end
+	 					p= "R$ #{number_with_precision(transaction.value, precision: 2)}"
+	 	- else
+	 		.wrap style="background: #ff4d4d"	
+	 			.d-flex.justify-content-between
+	 				.d-flex.justify-content-start
+	 					p= transaction.group
+	 				.d-flex.justify-content-end
+	 					p= "R$ #{number_with_precision(transaction.value, precision: 2)}"
+div#form_wrapper style="background: #fff; border-radius: 20px; box-shadow: 1px 2px 10px 2px #ccc; padding: 2%"
+	= form_with(url: "/save_transaction") do |f|
+		= f.select("kind", ["Receita", "Despesa"])
+		br
+		= f.text_field :title, placeholder: "Title"
+		br
+		= f.text_field :value, placeholder: "Value"
+		br
+		= f.text_field :group, placeholder: "Group"
+		br
+		= f.submit "Salvar", class: "btn btn-primary p-2"
+
+br
+br
+#charts	
+	.row.mb-5
+		.col-3
+			div#chart_despesas.bg-white.ml-2.mr-2.p-3 style="border-radius: 20px; box-shadow: 1px 2px 10px 2px #ccc; width: 100%"
+				h4= "Voce gasta cerca de #{number_with_precision(@porcentagem, precision: 2)}% do que recebe"
+	div#chart_despesas.bg-white.ml-2.mr-2.p-3 style="border-radius: 20px; box-shadow: 1px 2px 10px 2px #ccc; width: 70%"
+		h2 style="color: #666" Despesas vs Receitas
+		= line_chart @data_despesas_vs_receitas
+	br
+	br
+	br	
+	div#chart_despesas.bg-white.ml-2.mr-2.p-3 style="border-radius: 20px; box-shadow: 1px 2px 10px 2px #ccc; width: 70%"
+		h2 style="color: #666" Despesas
+		= line_chart @data_despesas
+	br
+	br
+	br	
+	div#chart_receitas.bg-white.ml-2.mr-2.p-3 style="border-radius: 20px; box-shadow: 1px 2px 10px 2px #ccc; width: 70%"
+		h2 style="color: #666" Receitas
+		= line_chart @data_receitas
+	br
+	br
+	br	
+	div.bg-white.ml-2.mr-2.p-3 style="border-radius: 20px; box-shadow: 1px 2px 10px 2px #ccc; width: 70%"
+		h2 style="color: #666" Receitas
+		= doughnut_chart @data_despesas_categorias		
+-5.times do |i|
+	br 
+
+
+javascript:
+	$("#form_wrapper").hide();
+	$("#button_cancelar").hide();
+	$("#charts").hide();
+
+	$("#button_adicionar").click(function(){
+		$("#form_wrapper").show(500);
+		$("#transactions_wrapper").hide(500);
+		$("#button_cancelar").show();
+		$("#button_adicionar").hide();
+	})
+	$("#button_cancelar").click(function(){
+		$("#form_wrapper").hide(500);
+		$("#transactions_wrapper").show(500);
+		$("#button_cancelar").hide();
+		$("#button_adicionar").show();
+	})
+	$("#btn_charts").click(function() {
+		$("#transactions_wrapper").hide(500);
+		$("#charts").show(500);
+	})
+css:
+	#form_wrapper input{
+		width: 80%;
+		border: none;
+		border-bottom: 1px solid #ccc;
+		margin-top: 5%;
+	}		
+	.btn {
+		border-radius: 15px !important;
+	}
+	.wrap{
+		width: 50%;
+		margin-left: 25%;
+		padding: 0 10px;
+		height: 40px;
+		margin-bottom: 2px;
+		color: white;
+	}

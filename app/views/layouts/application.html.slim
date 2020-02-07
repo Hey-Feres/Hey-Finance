@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Finance
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+  	header.pl-2.pr-2
+  		.d-flex.justify-content-between
+  			h4 Ola Bruno
+  			h4#button_adicionar +
+  			p.text-danger#button_cancelar Cancelar
+	- if notice  			
+    	div#notice
+    		p.text-center= notice
+    div style="margin-top: 50px"
+    div.menu
+    	.d-flex.justify-content-between.pl-2.pr-2
+    		.d-flex.justify-content-start
+    			p#btn_charts.mr-1.ml1.menu_option Analytics
+    			p.ml-1.menu_option Download Spreadsheet
+
+    		.d-flex.justify-content-end
+    			input type="text" placeholder="Search" style="border:none; border-radius: 15px; box-shadow: 1px 2px 10px 2px #ccc; height: 40px; padding: 0 10px"	
+    = yield
+    div#footer
+    	.d-flex.justify-content-between.pl-2.pr-2
+    		p Saldo:
+    		- if @saldo > 0 
+    			p style="color: green"= "R$ #{number_with_precision(@saldo, precision: 2)}"
+    		- elsif @saldo < 0	
+				p style="color: red"= "R$ #{number_with_precision(@saldo, precision: 2)}"
+			- else
+				p style="color: blue"= "R$ #{number_with_precision(@saldo, precision: 2)}"				
+css:
+	#notice{
+		position: fixed;
+		width: 100%;
+		left: 0;
+		top: 40px;
+		height: 25px;
+		background: blue;
+		color: white;
+	}
+	#notice p {
+		line-height: 25px;
+	}
+
+  .menu_option{
+    color: #666; 
+    background: white; 
+    border:none; 
+    border-radius: 15px; 
+    box-shadow: 1px 2px 10px 2px #ccc; 
+    height: 40px; 
+    padding: 0 10px
+  }
+javascript:
+   $(document).ready(function(){
+      setTimeout(function(){ $("#notice").fadeOut(); }, 3000);
+    })	
