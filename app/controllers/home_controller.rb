@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
- 	@transactions = Transaction.all.order("random()")
+ 	#@transactions = Transaction.all.order("random()")
+ 	@transactions = Transaction.all.order(created_at: "ASC").paginate(page: params[:page], per_page: 50)
 	despesas = Transaction.where(kind: "Despesa").map{|d| d.value}.sum.to_f
 	receitas = Transaction.where(kind: "Receita").map{|d| d.value}.sum.to_f
   	@saldo = receitas - despesas 
@@ -24,8 +25,10 @@ class HomeController < ApplicationController
 	#grm = gasto vs receitas mensais
 	despesas = Transaction.where(kind: "Despesa").map{|x| x.value}.sum.to_f
 	receitas = Transaction.where(kind: "Receita").map{|x| x.value}.sum.to_f
-
 	@porcentagem = (despesas * 100) / receitas
+	
+	@area_maior_despesa = Transaction.where(kind: "Despesa").group_by{|d| d.group}.map{|m,n| {"group" => m, "value" => n.map{|n| n.value}.sum.to_f}}.max_by{|x| x["value"]}["group"]
+	@area_menor_despesa = Transaction.where(kind: "Despesa").group_by{|d| d.group}.map{|m,n| {"group" => m, "value" => n.map{|n| n.value}.sum.to_f}}.min_by{|x| x["value"]}["group"]
   end
 
   def charts
@@ -80,7 +83,7 @@ class HomeController < ApplicationController
 	  labels: despesas_categorias.map{|d| d["group"]},
 	  datasets: [
 	    {
-	        label: "Receitas",
+	        label: "Despesas",
 	        backgroundColor: ["#0e0e52", "#150578", "#449dd1", "#3943b7", "#78c0e0"],
 	        borderColor: "#666",
 	        data: despesas_categorias.map{|d| d["value"]}
@@ -92,5 +95,5 @@ class HomeController < ApplicationController
 end
 
 #ubuntu@ubuntu:~/Ruby/finance$ rails g model Transaction kind title value:decimal group
-#100.times do |i| Transaction.create!(kind: "Despesa",title: "Teste",value: rand(10..1000),group: groups[rand(0..3)]) end
-#50.times do |i| Transaction.create!(kind: "Receita",title: "Teste",value: rand(1000..5000),group: "Remuneracao") end
+#1000.times do |i| Transaction.create!(kind: "Despesa",title: "Teste",value: rand(10..1000),group: groups[rand(0..3)]) end
+#200.times do |i| Transaction.create!(kind: "Receita",title: "Teste",value: rand(1000..5000),group: "Remuneracao") end

@@ -19,7 +19,12 @@ body{
 	background: #f2f2f2;
 }
 header{
-	background: rgba(255,255,255,0.9);
+	background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px) !important;
+    -moz-backdrop-filter: blur(10px) !important;
+    -ms-backdrop-filter: blur(10px) !important;
+    -o-backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 	position: fixed;
 	z-index: 99999;
 	width: 100%;
@@ -31,7 +36,12 @@ header h4, p{
 	line-height: 40px;
 }
 #footer {
-	background: rgba(255,255,255,0.9);
+	background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px) !important;
+    -moz-backdrop-filter: blur(10px) !important;
+    -ms-backdrop-filter: blur(10px) !important;
+    -o-backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 	position: fixed;
 	z-index: 99999;
 	width: 100%;
