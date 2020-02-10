@@ -1,0 +1,16 @@
+#transactions_wrapper
+	- @transactions.each do |transaction|
+		- if transaction.kind == "Receita"
+	 		.wrap style="background: #33cc33; border-radius: 10px"
+	 			.d-flex.justify-content-between
+	 				.d-flex.justify-content-start
+	 					p= transaction.group
+	 				.d-flex.justify-content-end
+	 					p= "R$ #{number_with_precision(transaction.value, precision: 2)}"
+	 	- else
+	 		.wrap style="background: #ff4d4d; border-radius: 10px"
+	 			.d-flex.justify-content-between
+	 				.d-flex.justify-content-start
+	 					p= transaction.group
+	 				.d-flex.justify-content-end
+	 					p= "R$ #{number_with_precision(transaction.value, precision: 2)}"

@@ -1,0 +1,140 @@
+#calculator-wrapper
+	center
+		.calculator
+			.header.d-flex.flex-column.justify-content-end style="background: #222; height: 100px; border-top-right-radius: 20px; border-top-left-radius: 20px"
+				.d-flex.justify-content-end.pr-2.pl-2
+					h1.text-white#result style="font-size: 4em;"
+			.body style="width: 80%"
+				.d-flex.justify-content-between
+					.number#1
+						h2 1
+					.number#2
+						h2 2
+					.number#3
+						h2 3												
+				.d-flex.justify-content-between
+					.number#4
+						h2 4
+					.number#5
+						h2 5
+					.number#6
+						h2 6												
+				.d-flex.justify-content-between
+					.number#7
+						h2 7
+					.number#8
+						h2 8
+					.number#9
+						h2 9
+				.d-flex.justify-content-center	
+					.number#0
+						h2 0
+				.d-flex.justify-content-center.operators	
+					.operator#soma style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;"
+						h2 +
+					.operator#subtracao
+						h2 -
+					.operator#divisao
+						h2 d
+					.operator#multiplicacao style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;"
+						h2 x
+				.d-flex.justify-content-center style="margin-top: 20px"
+					.bottom-operators.mr-2 style="width: 30%;"
+						h2 c
+					.bottom-operators.ml-2 style="width: 90%;"
+						h2 e
+
+
+javascript:
+	button_1 = $("#1")
+	button_2 = $("#2")
+	button_3 = $("#3")
+	button_4 = $("#4")
+	button_5 = $("#5")
+	button_6 = $("#6")
+	button_7 = $("#7")
+	button_8 = $("#8")
+	button_9 = $("#9")
+	button_0 = $("#0")
+	button_soma = $("#soma")
+	result = $("#result")
+
+
+	button_1.click(function() { result.text("1") })
+	button_2.click(function() { result.text("2") })
+	button_3.click(function() { result.text("3") })
+	button_4.click(function() { result.text("4") })
+	button_5.click(function() { result.text("5") })
+	button_6.click(function() { result.text("6") })
+	button_7.click(function() { result.text("7") })
+	button_8.click(function() { result.text("8") })
+	button_9.click(function() { result.text("9") })
+	button_0.click(function() { result.text("0") })
+
+	button_soma.click(function() {
+		valor_1 = result.text();
+		result.text("");
+		valor_2 = result.text();
+		soma = parseInt(valor_1) + parseInt(valor_2);
+		result.text(soma);
+	})
+
+css:
+	.calculator {
+		width: 50%; 
+		background: #333;
+		box-shadow: 1px 2px 10px 1px #666; 
+		border-radius: 20px; 
+		height: 800px; 
+		overflow: hidden; 
+		padding: 5px;	
+	}
+	.calculator .number{
+		width: 90px;
+		height: 90px;
+		border-radius: 50%;
+		background: #abbaab;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		color: #666;
+		margin-top: 20px
+	}
+	.calculator .number:hover{
+		background: -webkit-linear-gradient(to bottom, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to bottom, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */	
+	}	
+	.calculator .number h2{
+		line-height: 90px;
+	}
+
+	.operators {
+		margin-top: 20px;
+		border-radius: 20px;
+		background: #abbaab;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		height: 90px;
+	}
+	.operator {
+		width: 25%;
+		text-align: center;
+		height: 90px;
+	}
+	.operator:hover{
+		box-shadow: 1px 2px 10px 1px #666;
+	}
+	.operator h2 {
+		color: #666;
+		line-height: 90px;
+	}
+	.bottom-operators {
+		background: #abbaab;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 		height: 90px;
+ 		border-radius:20px;		
+	}
+	.bottom-operators h2 {
+		color: #666;
+		line-height: 90px;
+	}	
