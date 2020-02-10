@@ -21,7 +21,8 @@ html
     	.d-flex.justify-content-between.pl-2.pr-2
     		.d-flex.justify-content-start
     			p#btn_charts.mr-1.ml1.menu_option Analytics
-    			p.ml-1.menu_option Download Spreadsheet
+                = form_with(url: "/export_data") do |f|
+                    = f.submit "Download Spreadsheet", class: "ml-1 menu_option"
 
     		.d-flex.justify-content-end
     			input type="text" placeholder="Search" style="border:none; border-radius: 15px; box-shadow: 1px 2px 10px 2px #ccc; height: 40px; padding: 0 10px"	

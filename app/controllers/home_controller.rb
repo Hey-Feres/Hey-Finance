@@ -8,7 +8,14 @@ class HomeController < ApplicationController
   	charts
   	analytics
   end
- 
+ 	
+  def export_data
+  	@transactions = Transaction.all.order(created_at: "ASC")	
+    respond_to do |format|
+      format.csv { Transaction.send_data @transactions.to_csv, filename: "transactions-#{Date.today}.csv" }
+    end   		
+  end 	
+
   def save_transaction
   	transaction = Transaction.create!(
   		kind: params[:kind],
