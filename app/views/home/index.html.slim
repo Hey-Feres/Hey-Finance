@@ -30,8 +30,17 @@ javascript:
 	$("#btn_charts").click(function() {
 		$("#transactions_wrapper").hide(500);
 		$("#charts").show(500);
-	})
-
+	})	
+	$( "#calculator" ).dblclick(function() {
+		$("#calculator").hide(500);
+		$("#transactions_wrapper").show(500);
+	});
+	$( "body" ).dblclick(function() {
+		$("#calculator").show(500);
+		$("#transactions_wrapper").hide(500);
+		$("#form_wrapper").hide();
+		$("#charts").hide();		
+	});		
 css:
 	#form_wrapper input{
 		width: 80%;
