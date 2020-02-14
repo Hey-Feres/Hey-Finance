@@ -26,24 +26,22 @@
 						h2 8
 					.number.noselect#9
 						h2 9
-				.d-flex.justify-content-center	
+				.d-flex.justify-content-between	
+					.number.noselect#times
+						h2= "*"
 					.number.noselect#0
 						h2 0
-				/.d-flex.justify-content-between
-					/.operators	
-					.number#soma
+					.number.noselect#divide
+						h2= "/"
+				.d-flex.justify-content-between	
+					.number.noselect#plus
 						h2 +
-					.number#subtracao
+					/.number.noselect#clear
+						h2= "c"
+					.number.noselect#equal
+						h2= "="						
+					.number.noselect#minus
 						h2 -
-					.number#divisao
-						h2 d
-					.number#multiplicacao
-						h2 x
-				.d-flex.justify-content-center style="margin-top: 20px"
-					.clear.noselect#clear
-						h2 Clear
-					/.bottom-operators.ml-2 style="width: 90%;"
-						h2 e
 
 
 javascript:
@@ -57,8 +55,13 @@ javascript:
 	button_8 = $("#8")
 	button_9 = $("#9")
 	button_0 = $("#0")
-	button_soma = $("#soma")
+	button_soma = $("#plus")
+	button_sub = $("#minus")
+	button_div = $("#divide")
+	button_mult = $("#times")
 	button_clear = $("#clear")
+	button_equal = $("#equal")
+	
 	result = $("#result")
 
 	waitingForSecondOperand = true
@@ -73,8 +76,18 @@ javascript:
 	button_8.click(function() { result.text( result.text() +  "8" ) })
 	button_9.click(function() { result.text( result.text() +  "9" ) })
 	button_0.click(function() { result.text( result.text() +  "0" ) })
+	button_soma.click(function() { result.text( result.text() + "+") })
+	button_sub.click(function() { result.text( result.text() + "-") })
+	button_div.click(function() { result.text( result.text() + "/") })
+	button_mult.click(function() { result.text( result.text() + "*") })
 
 	button_clear.click(function() { result.text(" ") })
+
+	button_equal.click(function() {
+		value = result.text().split("/")	//.split("*").split("+").split("-")
+		resultado = 0
+		console.log(value)
+	})
 
 css:
 	.calculator {
